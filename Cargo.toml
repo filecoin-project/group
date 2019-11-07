@@ -1,5 +1,5 @@
 [package]
-name = "group"
+name = "groupy"
 version = "0.2.0"
 authors = [
     "Sean Bowe <ewillbefull@gmail.com>",
@@ -9,13 +9,13 @@ readme = "README.md"
 license = "MIT/Apache-2.0"
 
 description = "Elliptic curve group traits and utilities"
-documentation = "https://docs.rs/group/"
-homepage = "https://github.com/ebfull/group"
-repository = "https://github.com/ebfull/group"
+documentation = "https://docs.rs/groupy/"
+homepage = "https://github.com/filecoin-project/group"
+repository = "https://github.com/filecoin-project/group"
 edition = "2018"
 
 [dependencies]
-ff = { version = "0.5.0", path = "../ff" }
+ff = { version = "0.5.0" }
 rand = "0.7"
 rand_xorshift = "0.2"
 

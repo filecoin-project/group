@@ -35,7 +35,7 @@ pub trait CurveProjective:
 
     /// Normalizes a slice of projective elements so that
     /// conversion to affine is cheap.
-    fn batch_normalization(v: &mut [Self]);
+    fn batch_normalization<S: std::borrow::BorrowMut<Self>>(v: &mut [S]);
 
     /// Checks if the point is already "normalized" so that
     /// cheap affine conversion is possible.
@@ -73,6 +73,8 @@ pub trait CurveProjective:
     /// Recommends a wNAF window size given the number of scalars you intend to multiply
     /// a base by. Always returns a number between 2 and 22, inclusive.
     fn recommended_wnaf_for_num_scalars(num_scalars: usize) -> usize;
+
+    fn hash(msg: &[u8]) -> Self;
 }
 
 /// Affine representation of an elliptic curve point guaranteed to be
