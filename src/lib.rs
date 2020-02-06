@@ -1,7 +1,7 @@
 // Catch documentation errors caused by code changes.
 #![deny(intra_doc_link_resolution_failure)]
 
-use ff::{PrimeField, PrimeFieldDecodingError, ScalarEngine, SqrtField};
+use fff::{PrimeField, PrimeFieldDecodingError, ScalarEngine, SqrtField};
 use rand::RngCore;
 use std::error::Error;
 use std::fmt;
@@ -186,7 +186,7 @@ impl fmt::Display for GroupDecodingError {
             GroupDecodingError::CoordinateDecodingError(description, ref err) => {
                 write!(f, "{} decoding error: {}", description, err)
             }
-            _ => write!(f, "{}", self.description()),
+            _ => write!(f, "{}", self.to_string()),
         }
     }
 }

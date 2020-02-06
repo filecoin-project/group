@@ -1,4 +1,4 @@
-use ff::{Field, PrimeField};
+use fff::{Field, PrimeField};
 use rand::SeedableRng;
 use rand_xorshift::XorShiftRng;
 

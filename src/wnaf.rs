@@ -1,4 +1,4 @@
-use ff::{PrimeField, PrimeFieldRepr};
+use fff::{PrimeField, PrimeFieldRepr};
 
 use super::CurveProjective;
 
