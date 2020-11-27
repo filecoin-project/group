@@ -377,7 +377,7 @@ fn random_transformation_tests<G: CurveProjective>() {
         let g = G::random(&mut rng);
         let g_affine = g.into_affine();
         let g_projective = g_affine.into_projective();
-        assert_eq!(g, g_projective);
+        assert_eq!(g, g_projective, "failed projective transform");
     }
 
     // Batch normalization
@@ -406,10 +406,10 @@ fn random_transformation_tests<G: CurveProjective>() {
         G::batch_normalization(&mut v);
 
         for i in &v {
-            assert!(i.is_normalized());
+            assert!(i.is_normalized(), "not normalized");
         }
 
-        assert_eq!(v, expected_v);
+        assert_eq!(v, expected_v, "failed batch normalization");
     }
 }
 

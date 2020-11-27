@@ -74,6 +74,8 @@ pub trait CurveProjective:
     fn recommended_wnaf_for_num_scalars(num_scalars: usize) -> usize;
 
     fn hash(msg: &[u8]) -> Self;
+
+    fn as_bytes(&self) -> Vec<u8>;
 }
 
 /// Affine representation of an elliptic curve point guaranteed to be
@@ -118,6 +120,8 @@ pub trait CurveAffine:
     fn into_uncompressed(&self) -> Self::Uncompressed {
         <Self::Uncompressed as EncodedPoint>::from_affine(*self)
     }
+
+    fn as_bytes(&self) -> Vec<u8>;
 }
 
 /// An encoded elliptic curve point, which should essentially wrap a `[u8; N]`.
