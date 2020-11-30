@@ -1,6 +1,3 @@
-// Catch documentation errors caused by code changes.
-#![deny(intra_doc_link_resolution_failure)]
-
 use fff::{PrimeField, PrimeFieldDecodingError, ScalarEngine, SqrtField};
 use rand::RngCore;
 use std::fmt;
@@ -13,7 +10,18 @@ pub use self::wnaf::Wnaf;
 /// Projective representation of an elliptic curve point guaranteed to be
 /// in the correct prime order subgroup.
 pub trait CurveProjective:
-    PartialEq + Eq + Sized + Copy + Clone + Send + Sync + fmt::Debug + fmt::Display + 'static
+    PartialEq
+    + Eq
+    + Sized
+    + Copy
+    + Clone
+    + Send
+    + Sync
+    + fmt::Debug
+    + fmt::Display
+    + 'static
+    + serde::Serialize
+    + serde::Deserialize<'static>
 {
     type Engine: ScalarEngine<Fr = Self::Scalar>;
     type Scalar: PrimeField + SqrtField;
@@ -74,14 +82,23 @@ pub trait CurveProjective:
     fn recommended_wnaf_for_num_scalars(num_scalars: usize) -> usize;
 
     fn hash(msg: &[u8]) -> Self;
-
-    fn as_bytes(&self) -> Vec<u8>;
 }
 
 /// Affine representation of an elliptic curve point guaranteed to be
 /// in the correct prime order subgroup.
 pub trait CurveAffine:
-    Copy + Clone + Sized + Send + Sync + fmt::Debug + fmt::Display + PartialEq + Eq + 'static
+    Copy
+    + Clone
+    + Sized
+    + Send
+    + Sync
+    + fmt::Debug
+    + fmt::Display
+    + PartialEq
+    + Eq
+    + 'static
+    + serde::Serialize
+    + serde::Deserialize<'static>
 {
     type Engine: ScalarEngine<Fr = Self::Scalar>;
     type Scalar: PrimeField + SqrtField;
@@ -120,8 +137,6 @@ pub trait CurveAffine:
     fn into_uncompressed(&self) -> Self::Uncompressed {
         <Self::Uncompressed as EncodedPoint>::from_affine(*self)
     }
-
-    fn as_bytes(&self) -> Vec<u8>;
 }
 
 /// An encoded elliptic curve point, which should essentially wrap a `[u8; N]`.
