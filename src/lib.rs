@@ -1,6 +1,3 @@
-// Catch documentation errors caused by code changes.
-#![deny(intra_doc_link_resolution_failure)]
-
 use fff::{PrimeField, PrimeFieldDecodingError, ScalarEngine, SqrtField};
 use rand::RngCore;
 use std::fmt;
@@ -13,7 +10,18 @@ pub use self::wnaf::Wnaf;
 /// Projective representation of an elliptic curve point guaranteed to be
 /// in the correct prime order subgroup.
 pub trait CurveProjective:
-    PartialEq + Eq + Sized + Copy + Clone + Send + Sync + fmt::Debug + fmt::Display + 'static
+    PartialEq
+    + Eq
+    + Sized
+    + Copy
+    + Clone
+    + Send
+    + Sync
+    + fmt::Debug
+    + fmt::Display
+    + 'static
+    + serde::Serialize
+    + serde::Deserialize<'static>
 {
     type Engine: ScalarEngine<Fr = Self::Scalar>;
     type Scalar: PrimeField + SqrtField;
@@ -79,7 +87,18 @@ pub trait CurveProjective:
 /// Affine representation of an elliptic curve point guaranteed to be
 /// in the correct prime order subgroup.
 pub trait CurveAffine:
-    Copy + Clone + Sized + Send + Sync + fmt::Debug + fmt::Display + PartialEq + Eq + 'static
+    Copy
+    + Clone
+    + Sized
+    + Send
+    + Sync
+    + fmt::Debug
+    + fmt::Display
+    + PartialEq
+    + Eq
+    + 'static
+    + serde::Serialize
+    + serde::Deserialize<'static>
 {
     type Engine: ScalarEngine<Fr = Self::Scalar>;
     type Scalar: PrimeField + SqrtField;

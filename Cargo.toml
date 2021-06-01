@@ -19,6 +19,7 @@ fff = { version = "0.2.0" }
 rand = "0.7"
 rand_xorshift = "0.2"
 thiserror = "1.0.10"
+serde = { version = "1", default-features = false }
 
 [badges]
 maintenance = { status = "actively-developed" }
