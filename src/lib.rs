@@ -168,3 +168,21 @@ pub trait UncompressedEncoding: Sized {
     /// the point at infinity.
     fn to_uncompressed(&self) -> Self::Uncompressed;
 }
+
+/// An error that may occur when trying to decode an curve point.
+#[derive(thiserror::Error, Debug)]
+pub enum CurveDecodingError {
+    #[error("decoded coordinate(s) do not lie on the curve")]
+    NotOnCurve,
+    #[error("decoded point is not in the curve's prime order subgroup")]
+    NotInSubgroup,
+    /// One of the coordinates could not be decoded
+    #[error("coordinate (`{coord_name}`) is not in the required field")]
+    CoordinateDecodingError { coord_name: &'static str },
+    /// The compression mode of the encoded element was not as expected
+    #[error("encoding has unexpected compression mode")]
+    UnexpectedCompressionMode,
+    /// The encoding contained bits that should not have been set
+    #[error("encoding has unexpected information")]
+    UnexpectedInformation,
+}
